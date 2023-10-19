@@ -72,18 +72,8 @@ static function PlayImpactHitEffects(KFPawn P, vector HitLocation, vector HitDir
 
 /** Called when damage is dealt to apply additional damage type (e.g. Damage Over Time) */
 static function ApplySecondaryDamage( KFPawn Victim, int DamageTaken, optional Controller InstigatedBy )
-{
-	local class<KFDamageType> ToxicDT;
-	local KFPawn_Monster KFM;
-	
-	ToxicDT = class'KFDT_Ballistic_Assault_Medic'.static.GetMedicToxicDmgType( DamageTaken, InstigatedBy );
-	if ( ToxicDT != None )
-	{
-		Victim.ApplyDamageOverTime(DamageTaken, InstigatedBy, ToxicDT);
-	}
-	
-	// potential for two DoTs if DoT_Type is set
-	if (default.BleedDamageType.default.DoT_Type != DOT_None)
+
+	// No more Toxic DOT
 	{
 		KFM = KFPawn_Monster(Victim);
 		
